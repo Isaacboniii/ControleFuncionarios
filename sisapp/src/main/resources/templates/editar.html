@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Funcionário</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5 bg-dark bg-gradient text-white p-4 rounded">
+    <div class="container">
+        <h2>Editar Funcionário</h2>
+        <form action="/funcionarios/atualizar" method="post">
+            <input type="hidden" th:if="${funcionario.id}" name="id" th:value="${funcionario.id}"/>
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" th:value="${funcionario.nome}" required>
+            </div>
+            <div class="form-group">
+                <label for="dtadm">Data de Admissão</label>
+                <input type="date" class="form-control" id="dtadm" name="dtadm" th:value="${funcionario.dtadm}" required>
+            </div>
+            <div class="form-group">
+                <label for="funcao">Função</label>
+                <input type="text" class="form-control" id="funcao" name="funcao" th:value="${funcionario.funcao}" required>
+            </div>
+            <div class="form-group">
+                <label for="salario">Salário</label>
+                <input type="number" class="form-control" id="salario" name="salario" th:value="${funcionario.salario}" step="0.01" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+        </form>
+    </div>
+</body>
+</html>

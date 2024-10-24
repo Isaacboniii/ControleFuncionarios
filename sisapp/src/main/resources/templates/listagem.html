@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Funcionários</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5 bg-dark bg-gradient text-white p-4 rounded">
+    <div class="container">
+        <h2>Lista de Funcionários</h2>
+        
+        <!-- Botão para cadastrar novo funcionário -->
+        <div class="mb-4">
+            <a href="/funcionarios/cadastro" class="btn btn-success">Cadastrar Novo Funcionário</a>
+        </div>
+        
+        <!-- Formulário de busca por ID ou Nome -->
+        <form action="/funcionarios" method="get" class="form-inline mb-4 text-white">
+            <!-- Campo de busca por ID -->
+            <input type="text" name="id" class="form-control mr-2" placeholder="Buscar por ID" th:value="${param.id}">
+            
+            <!-- Campo de busca por Nome -->
+            <input type="text" name="nome" class="form-control mr-2" placeholder="Buscar por nome" th:value="${param.nome}">
+            
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+        
+        <!-- Tabela de funcionários -->
+        <table class="table table-striped text-white">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Data de Admissão</th>
+                    <th>Função</th>
+                    <th>Salário</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iteração sobre a lista de funcionários -->
+                <tr th:each="funcionario : ${funcionarios}">
+                    <td th:text="${funcionario.id}"></td>
+                    <td th:text="${funcionario.nome}"></td>
+                    <td th:text="${funcionario.dtadm}"></td>
+                    <td th:text="${funcionario.funcao}"></td>
+                    <td th:text="${funcionario.salario}"></td>
+                    <td>
+                        <a th:href="@{/funcionarios/editar/{id}(id=${funcionario.id})}" class="btn btn-warning">Editar</a>
+                        <a th:href="@{/funcionarios/deletar/{id}(id=${funcionario.id})}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja deletar?');">Deletar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
